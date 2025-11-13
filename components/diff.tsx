@@ -78,6 +78,9 @@ const DiffView = memo(function DiffView({
         newValue={newValue?.content}
         splitView={true}
         leftTitle={oldValue?.path}
+        rightTitle={
+          oldValue?.path === newValue?.path ? undefined : newValue?.path
+        }
         useDarkTheme={currentTheme === "dark"}
         styles={{
           line: {

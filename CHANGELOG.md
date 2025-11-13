@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.6](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.5...0.0.1-dev.6) (2025-11-13)
+
+
+### Features
+
+* add flutter 3.27.4 source files ([12c4be3](https://github.com/albinpk/flutter-upgrade-helper/commit/12c4be326738a0036e94e6025e93d30a6f3f49b7))
+
 ## 0.0.1-dev.5 (2025-11-13)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.7](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.6...0.0.1-dev.7) (2025-11-13)
+
+
+### Bug Fixes
+
+* update rightTitle logic in DiffView component ([886ca28](https://github.com/albinpk/flutter-upgrade-helper/commit/886ca28fc21ac5440eb90cdb0b9ff14a8bc2298b))
+
 ## [0.0.1-dev.6](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.5...0.0.1-dev.6) (2025-11-13)
 
 

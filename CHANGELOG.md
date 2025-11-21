@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.8](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.7...0.0.1-dev.8) (2025-11-21)
+
+
+### Features
+
+* add flutter 3.38.2 ([b95bcb6](https://github.com/albinpk/flutter-upgrade-helper/commit/b95bcb679ad1b42032916dba7ffd6aeebef946ae))
+
 ## [0.0.1-dev.7](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.6...0.0.1-dev.7) (2025-11-13)
 
 

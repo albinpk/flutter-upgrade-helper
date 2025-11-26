@@ -16,7 +16,7 @@ import FileTile from "./FileTile";
 import { allPlatforms } from "./form";
 import TextButton from "./TextButton";
 
-export default function NewDiff({
+export default function DiffView({
   from,
   to,
   platforms,
@@ -102,14 +102,14 @@ export default function NewDiff({
           visible={visibility[key] ?? true}
           onExpand={() => onVisibilityChange(key)}
         >
-          <DiffView key={key} oldValue={oldData[key]} newValue={newData[key]} />
+          <FileDiff key={key} oldValue={oldData[key]} newValue={newData[key]} />
         </FileTile>
       ))}
     </>
   );
 }
 
-const DiffView = memo(function DiffView({
+const FileDiff = memo(function DiffView({
   oldValue,
   newValue,
 }: {

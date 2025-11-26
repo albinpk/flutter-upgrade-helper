@@ -1,4 +1,4 @@
-import NewDiff from "@/components/NewDiff";
+import DiffView from "@/components/DiffView";
 import fs from "fs";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -53,9 +53,7 @@ export default function Home({ versions }: { versions: string[] }) {
         />
         <div className="h-4"></div>
 
-        {/* todo: file names */}
-        <NewDiff from={from} to={to} platforms={platform} />
-        {/* <Diff from={from} to={to} platforms={platform} /> */}
+        <DiffView from={from} to={to} platforms={platform} />
       </div>
     </ThemeProvider>
   );

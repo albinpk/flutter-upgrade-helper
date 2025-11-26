@@ -1,3 +1,4 @@
+/*
 import { FileData, FileMap } from "@/scripts/generateSource";
 import { useTheme } from "next-themes";
 import { memo, useEffect, useState } from "react";
@@ -38,13 +39,13 @@ export default function Diff({
 
   if (!from || !to)
     return (
-      <div className="flex items-center justify-center text-gray-500 mt-8">
+      <div className="mt-8 flex items-center justify-center text-gray-500">
         Please select two versions
       </div>
     );
 
   const files = Array.from(
-    new Set([...Object.keys(oldData), ...Object.keys(newData)])
+    new Set([...Object.keys(oldData), ...Object.keys(newData)]),
   );
 
   const filtered = files.filter((v) => {
@@ -99,3 +100,4 @@ const DiffView = memo(function DiffView({
     </div>
   );
 });
+*/

@@ -1,0 +1,5 @@
+{
+    "files.exclude": {
+        "/public/data/src/**": true
+    }
+}

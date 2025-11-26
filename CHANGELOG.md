@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.1-dev.10](/compare/0.0.1-dev.9...0.0.1-dev.10) (2025-11-26)
+
+
+### Bug Fixes
+
+* update packages b0400a6
+
+
+### Features
+
+* using react-diff-view and update ui/ux 87d7833
+
 ## [0.0.1-dev.9](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.8...0.0.1-dev.9) (2025-11-24)
 
 

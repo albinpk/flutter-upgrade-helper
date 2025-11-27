@@ -23,13 +23,14 @@ interface SmallProps {
 }
 
 export function SmallButton({ onClick, Icon }: SmallProps) {
+  const i = "text-black/50 dark:text-white/50";
   return (
     <button
       type="button"
       onClick={onClick}
       className="bg-brand inline-flex h-5 w-5 items-center justify-center rounded-md text-white shadow-xs hover:bg-black/20 dark:hover:bg-white/20"
     >
-      {<Icon size={12} />}
+      {<Icon className={i} size={12} />}
     </button>
   );
 }

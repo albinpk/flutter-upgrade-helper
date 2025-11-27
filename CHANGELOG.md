@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.1-dev.12](/compare/0.0.1-dev.11...0.0.1-dev.12) (2025-11-27)
+
+
+### Bug Fixes
+
+* icon color on light theme 1ece488
+
+
+### Features
+
+* copy path to clipboard c18deea
+
 ## [0.0.1-dev.11](/compare/0.0.1-dev.10...0.0.1-dev.11) (2025-11-27)
 
 

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
-import IconButton from "./IconButton";
+import { FaAngleDown, FaAngleUp, FaRegCopy } from "react-icons/fa6";
+import IconButton, { SmallButton } from "./IconButton";
 
 interface Props {
   filePath: string;
@@ -23,6 +23,12 @@ export default function FileTile({
           onClick={onExpand}
         />
         {filePath}
+        <SmallButton
+          Icon={FaRegCopy}
+          onClick={() => {
+            navigator.clipboard.writeText(filePath);
+          }}
+        />
       </div>
       {visible && <div className="mt-4">{children}</div>}
     </div>

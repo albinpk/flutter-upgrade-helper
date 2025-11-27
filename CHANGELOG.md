@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.11](/compare/0.0.1-dev.10...0.0.1-dev.11) (2025-11-27)
+
+
+### Features
+
+* add flutter 3.24.5 3b8cb19
+
 ## [0.0.1-dev.10](/compare/0.0.1-dev.9...0.0.1-dev.10) (2025-11-26)
 
 

@@ -21,7 +21,7 @@ export default function Form({
   setPlatform: (platforms: string) => void;
 }) {
   return (
-    <form className="max-w-sm mx-auto">
+    <form className="mx-auto max-w-sm">
       <div className="flex gap-4">
         <div className="flex-1">
           <VersionDropdown
@@ -39,7 +39,7 @@ export default function Form({
         </div>
       </div>
 
-      <div className="flex mt-5">
+      <div className="mt-5 flex">
         {allPlatforms.map((platform) => (
           <Check
             key={platform}
@@ -63,13 +63,13 @@ function Check({
   onChange: (value: string) => void;
 }) {
   return (
-    <div className="flex items-center me-4">
+    <div className="me-4 flex items-center">
       <input
         id={platform}
         type="checkbox"
         checked={checked}
         value={platform}
-        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+        className="h-4 w-4 rounded-sm border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
         onChange={(e) => onChange(e.target.value)}
       />
       <label
@@ -95,13 +95,13 @@ function VersionDropdown({
     <div className="">
       <label
         htmlFor={label}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
       >
         {label}
       </label>
       <select
         id={label}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
         onChange={(v) => onChange(v.target.value)}
         defaultValue={""}
       >

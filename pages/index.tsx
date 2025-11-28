@@ -21,7 +21,7 @@ export async function getStaticProps() {
   const jsonPath = path.join(process.cwd(), "public", "data", "versions.json");
   const content = fs.readFileSync(jsonPath, "utf8");
   const versions = JSON.parse(content);
-  return { props: { versions } };
+  return { props: { versions: versions.reverse() } };
 }
 
 export default function Home({ versions }: { versions: string[] }) {

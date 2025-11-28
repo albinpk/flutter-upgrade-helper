@@ -78,6 +78,13 @@ export default function DiffView({
       </div>
     );
 
+  if (from === to)
+    return (
+      <div className="mt-8 flex items-center justify-center text-gray-500">
+        Please select two different versions
+      </div>
+    );
+
   const files = Array.from(
     new Set([...Object.keys(oldData), ...Object.keys(newData)]),
   );
@@ -98,33 +105,42 @@ export default function DiffView({
 
   return (
     <>
-      <div className="mb-3 flex flex-row justify-end rounded-md">
-        <TextButton
-          label={showChangesOnly ? "Show All Files" : "Show Changes Only"}
-          onClick={() => setShowChangesOnly((v) => !v)}
-        />
-        <TextButton
-          label={expandAll ? "Collapse All" : "Expand All"}
-          onClick={onExpandAll}
-        />
+      <div className="mb-3 flex flex-row items-center justify-between rounded-md">
+        {filtered.length} files
+        <div>
+          <TextButton
+            label={showChangesOnly ? "Show All Files" : "Show Changes Only"}
+            onClick={() => setShowChangesOnly((v) => !v)}
+          />
+          <TextButton
+            label={expandAll ? "Collapse All" : "Expand All"}
+            onClick={onExpandAll}
+          />
+        </div>
       </div>
 
-      {filtered.map((key) => (
-        <FileTile
-          key={key}
-          filePath={key}
-          visible={visibility[key] ?? true}
-          onExpand={() => onVisibilityChange(key)}
-        >
-          {oldData[key]?.content === newData[key]?.content ? (
-            <div className="p-4 pt-0 text-center text-black/40 italic dark:text-white/40">
-              No changes
-            </div>
-          ) : (
-            <FileDiff oldValue={oldData[key]} newValue={newData[key]} />
-          )}
-        </FileTile>
-      ))}
+      {filtered.length === 0 ? (
+        <div className="mt-8 flex items-center justify-center text-gray-500">
+          There are no changes
+        </div>
+      ) : (
+        filtered.map((key) => (
+          <FileTile
+            key={key}
+            filePath={key}
+            visible={visibility[key] ?? true}
+            onExpand={() => onVisibilityChange(key)}
+          >
+            {oldData[key]?.content === newData[key]?.content ? (
+              <div className="p-4 pt-0 text-center text-black/40 italic dark:text-white/40">
+                No changes
+              </div>
+            ) : (
+              <FileDiff oldValue={oldData[key]} newValue={newData[key]} />
+            )}
+          </FileTile>
+        ))
+      )}
     </>
   );
 }

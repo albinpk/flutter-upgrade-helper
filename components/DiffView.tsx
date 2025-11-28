@@ -52,6 +52,7 @@ export default function DiffView({
 
   const [visibility, setVisibility] = useState<Visibility>({});
   const [expandAll, setExpandAll] = useState(true);
+  const [showChangesOnly, setShowChangesOnly] = useState(true);
 
   const onVisibilityChange = (key: string) => {
     setVisibility((o) => {
@@ -81,15 +82,27 @@ export default function DiffView({
     new Set([...Object.keys(oldData), ...Object.keys(newData)]),
   );
 
-  const filtered = files.filter((v) => {
+  var filtered = files.filter((v) => {
+    if (v === ".metadata") return false;
+
     const dir = v.split("/")[0];
     if (!allPlatforms.map((v) => v.toLowerCase()).includes(dir)) return true;
     return platforms?.has(dir) ?? true;
   });
 
+  if (showChangesOnly) {
+    filtered = filtered.filter((key) => {
+      return oldData[key]?.content !== newData[key]?.content;
+    });
+  }
+
   return (
     <>
       <div className="mb-3 flex flex-row justify-end rounded-md">
+        <TextButton
+          label={showChangesOnly ? "Show All Files" : "Show Changes Only"}
+          onClick={() => setShowChangesOnly((v) => !v)}
+        />
         <TextButton
           label={expandAll ? "Collapse All" : "Expand All"}
           onClick={onExpandAll}
@@ -98,11 +111,18 @@ export default function DiffView({
 
       {filtered.map((key) => (
         <FileTile
+          key={key}
           filePath={key}
           visible={visibility[key] ?? true}
           onExpand={() => onVisibilityChange(key)}
         >
-          <FileDiff key={key} oldValue={oldData[key]} newValue={newData[key]} />
+          {oldData[key]?.content === newData[key]?.content ? (
+            <div className="p-4 pt-0 text-center text-black/40 italic dark:text-white/40">
+              No changes
+            </div>
+          ) : (
+            <FileDiff oldValue={oldData[key]} newValue={newData[key]} />
+          )}
         </FileTile>
       ))}
     </>

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.15](/compare/0.0.1-dev.14...0.0.1-dev.15) (2025-11-28)
+
+
+### Features
+
+* filter changed files only 2e386d7
+
 ## [0.0.1-dev.14](/compare/0.0.1-dev.13...0.0.1-dev.14) (2025-11-28)
 
 

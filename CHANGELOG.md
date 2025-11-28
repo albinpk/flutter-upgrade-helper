@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.14](/compare/0.0.1-dev.13...0.0.1-dev.14) (2025-11-28)
+
+
+### Features
+
+* add flutter `3.38.3` e88794a
+
 ## [0.0.1-dev.13](/compare/0.0.1-dev.12...0.0.1-dev.13) (2025-11-28)
 
 

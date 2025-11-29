@@ -22,7 +22,8 @@ jobs:
                   git config --global user.name 'Albin'
                   git config --global user.email '56157868+albinpk@users.noreply.github.com'
             - name: Generate Project
-              run: npm run new ${{ inputs.flutter_version }}
+              #   run: npm run new ${{ inputs.flutter_version }}
+              run: npm run new 3.38.3
             - name: Commit & Push
               run: |
                   git commit -am "From action"

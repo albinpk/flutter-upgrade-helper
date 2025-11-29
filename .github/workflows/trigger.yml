@@ -15,9 +15,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            #   with:
-            #       token: ${{ secrets.PAT }}
-            # - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
             - run: curl -fsSL https://fvm.app/install.sh | bash
             - name: Git Config
               run: |
@@ -25,7 +22,7 @@ jobs:
                   git config --global user.email '56157868+albinpk@users.noreply.github.com'
             - name: Generate Project
               #   run: npm run new ${{ inputs.flutter_version }}
-              run: npm run new 3.0.5
+              run: npm run new 3.32.0
             - name: Commit & Push
               run: |
                   git add .

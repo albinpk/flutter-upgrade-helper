@@ -4,7 +4,6 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Flutter Upgrade Helper — Upgrade Flutter Projects with Confidence</title>
         <meta
           name="description"
           content="Compare Flutter versions, view project template changes, and upgrade your Flutter apps safer and faster with a GitHub-style diff viewer."
@@ -32,7 +31,7 @@ export default function Document() {
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://flutter-upgrade-helper.albinpk.dev/og-image.png"
+          content="https://raw.githubusercontent.com/albinpk/flutter-upgrade-helper/refs/heads/main/public/flutter-upgrade-helper-logo.png"
         />
 
         {/* Twitter */}

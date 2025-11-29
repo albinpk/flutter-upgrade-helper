@@ -9,7 +9,7 @@
     "lint": "eslint",
     "new": "./scripts/createFlutterApp.sh",
     "api": "node ./scripts/generateSource.ts",
-    "release": "release-it --preRelease"
+    "r": "release-it --preRelease"
   },
   "dependencies": {
     "next": "16.0.1",

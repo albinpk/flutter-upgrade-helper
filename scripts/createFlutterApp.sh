@@ -13,9 +13,9 @@ cd public/data/src
 pwd
 rm -rf $version
 
-fvm spawn $version create my_app
+fvm spawn $version create flutter_upgrade_helper_app
 
-cd my_app
+cd flutter_upgrade_helper_app
 
 git init
 git add .
@@ -24,7 +24,8 @@ git commit -m first
 git clean -Xdf
 rm -rf .git
 find . -type f -name "*.png" -exec rm {} +
+find . -type f -name "*.ico" -exec rm {} +
 
 pwd
 cd ..
-mv my_app/ $version
+mv flutter_upgrade_helper_app/ $version

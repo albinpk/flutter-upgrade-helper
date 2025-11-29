@@ -13,7 +13,7 @@ cd public/data/src
 pwd
 rm -rf $version
 
-fvm spawn $version create my_app -e
+fvm spawn $version create my_app
 
 cd my_app
 

@@ -15,3 +15,9 @@ jobs:
             - run: curl -fsSL https://fvm.app/install.sh | bash
             - name: Generate Project
               run: npm run new ${{ inputs.flutter_version }}
+            - name: Commit & Push
+              run: |
+                  git config --global user.name 'Albin'
+                  git config --global user.email '56157868+albinpk@users.noreply.github.com'
+                  git commit -am "From action"
+                  git push

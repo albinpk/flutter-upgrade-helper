@@ -1,6 +1,6 @@
 on:
-    push:
-        branches: [dev]
+    # push:
+    #     branches: [dev]
     workflow_dispatch:
         inputs:
             flutter_version:
@@ -21,8 +21,8 @@ jobs:
                   git config --global user.name 'Albin'
                   git config --global user.email '56157868+albinpk@users.noreply.github.com'
             - name: Generate Project
-              #   run: npm run new ${{ inputs.flutter_version }}
-              run: npm run new 3.32.0
+              run: npm run new ${{ inputs.flutter_version }}
+            #   run: npm run new 3.32.0
             - name: Commit & Push
               run: |
                   git add .

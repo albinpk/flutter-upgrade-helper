@@ -26,5 +26,5 @@ jobs:
             - name: Commit & Push
               run: |
                   git add .
-                  git commit -m "From action"
+                  git commit -m "feat: add flutter `${{ inputs.flutter_version }}`"
                   git push

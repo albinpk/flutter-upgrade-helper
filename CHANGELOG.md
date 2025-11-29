@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.18](/compare/0.0.1-dev.17...0.0.1-dev.18) (2025-11-29)
+
+
+### Features
+
+* update app metadata and seo optimizations 13074e3
+
 ## [0.0.1-dev.17](/compare/0.0.1-dev.16...0.0.1-dev.17) (2025-11-28)
 
 

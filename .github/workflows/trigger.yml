@@ -7,14 +7,16 @@ on:
                 description: "Flutter Version"
                 required: true
                 type: string
+permissions:
+    contents: write
 
 jobs:
     add_flutter_app:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-              with:
-                  token: ${{ secrets.PAT }}
+            #   with:
+            #       token: ${{ secrets.PAT }}
             # - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
             - run: curl -fsSL https://fvm.app/install.sh | bash
             - name: Git Config

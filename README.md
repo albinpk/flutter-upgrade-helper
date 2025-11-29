@@ -1,40 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+# 🚀 Flutter Upgrade Helper  
+**Upgrade Flutter projects with confidence.**
 
-## Getting Started
+Flutter Upgrade Helper is a web tool that helps developers compare Flutter SDK versions and identify template-level changes across platforms. It provides a clean, GitHub-style diff viewer that highlights added, removed, and updated files — making Flutter upgrades faster, safer, and more predictable.
 
-First, run the development server:
+Live Demo: **https://flutter-upgrade-helper.albinpk.dev/**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 📌 Features
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- 🔍 **Compare any two Flutter versions** (Stable channel)
+- 🧩 **GitHub-style diff viewer**
+- 🖥 **Filter by platform**  
+  iOS, Android, Web, macOS, Linux, Windows
+- 📁 **View all files or changed files only**
+- 🔄 **Expand/collapse individual or all files**
+- 🧮 **Total file count and change summary**
+- ⚡ Uses minimal Flutter template projects for clear diffs
+- 🌐 Built with **Next.js**  
+- 🎯 Designed for **Flutter developers**
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## 🎯 Why This Tool?
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Upgrading Flutter projects often introduces changes across:
+- `android/`
+- `ios/`
+- `web/`
+- `windows/`
+- `linux/`
+- `macos/`
+- `pubspec.yaml`
+- Configuration files and build scripts
 
-## Learn More
+Manually comparing versions is time-consuming and error-prone.
 
-To learn more about Next.js, take a look at the following resources:
+**Flutter Upgrade Helper automates this process** by generating version diffs instantly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🛠️ Tech Stack
 
-## Deploy on Vercel
+- **Next.js**
+- **TypeScript**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+## 🏗️ How It Works
+
+1. Select two Flutter versions.  
+2. The tool fetches template files for each version.  
+3. Diff is generated using an internal comparison engine.  
+4. Results are displayed in a GitHub-like diff viewer with filters and platform toggles.
+
+---
+
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to submit Issues or Pull Requests.
+
+---
+
+## 🧑‍💻 Author
+
+**Albin PK**
+
+* GitHub: [https://github.com/albinpk](https://github.com/albinpk)
+* LinkedIn: [https://www.linkedin.com/in/albinpk/](https://www.linkedin.com/in/albinpk/)
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+See the `LICENSE` file for details.
+
+---
+
+
+## ⭐ Support the Project
+
+If this tool helps you upgrade Flutter projects faster,
+**please give the repo a star! ⭐**

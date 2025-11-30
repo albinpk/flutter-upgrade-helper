@@ -7,6 +7,6 @@ export default function App({ Component, pageProps }: AppProps) {
     <Head>
       <title>Flutter Upgrade Helper — Upgrade Flutter Projects with Confidence</title>
     </Head>
-    <Component {...pageProps} />;
+    <Component {...pageProps} />
   </>
 }

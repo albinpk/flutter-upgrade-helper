@@ -29,9 +29,7 @@ export default function FileTile({
           }
           onClick={onExpand}
         />
-        <p className="break-all">
-          {filePath}
-        </p>
+        <p className="break-all">{filePath}</p>
         <div className="mr-2">
           <SmallButton
             Icon={FaRegCopy}

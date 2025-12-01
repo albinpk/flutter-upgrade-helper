@@ -17,17 +17,13 @@ import FileTile from "./FileTile";
 import { allPlatforms } from "./form";
 import TextButton from "./TextButton";
 
-export default function DiffView({
-  platforms,
-}: {
-  platforms?: Set<string>;
-}) {
+export default function DiffView({ platforms }: { platforms?: Set<string> }) {
   const router = useRouter();
   const [oldData, setOldData] = useState<FileMap>({});
   const [newData, setNewData] = useState<FileMap>({});
-  
-  const from = `${router.query.from ?? ''}`;
-  const to = `${router.query.to ??''}`
+
+  const from = `${router.query.from ?? ""}`;
+  const to = `${router.query.to ?? ""}`;
 
   useEffect(() => {
     if (!from || from === to) return;

@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.1-dev.19](/compare/0.0.1-dev.18...0.0.1-dev.19) (2025-12-01)
+
+
+### Bug Fixes
+
+* mobile responsiveness 44614d2
+* remove ";" 395e390
+
+
+### Features
+
+* sticky file header a56b8c9
+* url based version selection c3cc044
+
 ## [0.0.1-dev.18](/compare/0.0.1-dev.17...0.0.1-dev.18) (2025-11-29)
 
 

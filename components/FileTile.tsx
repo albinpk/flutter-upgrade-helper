@@ -29,13 +29,17 @@ export default function FileTile({
           }
           onClick={onExpand}
         />
-        {filePath}
-        <SmallButton
-          Icon={FaRegCopy}
-          onClick={() => {
-            navigator.clipboard.writeText(filePath);
-          }}
-        />
+        <p className="break-all">
+          {filePath}
+        </p>
+        <div className="mr-2">
+          <SmallButton
+            Icon={FaRegCopy}
+            onClick={() => {
+              navigator.clipboard.writeText(filePath);
+            }}
+          />
+        </div>
       </div>
       {visible && <div className="mt-4">{children}</div>}
     </div>

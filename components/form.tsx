@@ -39,7 +39,7 @@ export default function Form({
         </div>
       </div>
 
-      <div className="mt-5 flex">
+      <div className="mt-5 flex flex-wrap justify-center gap-2">
         {allPlatforms.map((platform) => (
           <Check
             key={platform}

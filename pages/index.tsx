@@ -56,7 +56,7 @@ export default function Home({ versions }: { versions: string[] }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <div className="m-8">
+      <div className="m-2 sm:m-8">
         <div className="mb-6 text-center text-2xl">Flutter Upgrade Helper</div>
 
         <Form

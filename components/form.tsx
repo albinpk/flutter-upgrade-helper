@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+
 export const allPlatforms = [
   "Android",
   "iOS",
@@ -9,32 +11,48 @@ export const allPlatforms = [
 
 export default function Form({
   versions,
-  setFrom,
-  setTo,
   platforms,
   setPlatform,
 }: {
   versions: string[];
-  setFrom: (version: string) => void;
-  setTo: (version: string) => void;
   platforms: Set<string>;
   setPlatform: (platforms: string) => void;
 }) {
+  const router = useRouter();
+  const from = `${router.query.from ?? ''}`;
+  const to = `${router.query.to ??''}`
+
   return (
     <form className="mx-auto max-w-sm">
       <div className="flex gap-4">
         <div className="flex-1">
           <VersionDropdown
             label="Current version"
+            value={from}
             versions={versions}
-            onChange={setFrom}
+            onChange={(v)=>{
+              router.replace({
+                query: {
+                  ...router.query,
+                  from: v
+                }
+              })
+            }}
           />
         </div>
         <div className="flex-1">
           <VersionDropdown
             label="New version"
+            value={to}
             versions={versions}
-            onChange={setTo}
+            onChange={(v)=>{
+              router.replace({
+                query: {
+                  ...router.query,
+                  to: v
+                }
+              })
+            }}
           />
         </div>
       </div>
@@ -84,10 +102,12 @@ function Check({
 
 function VersionDropdown({
   label,
+  value,
   versions,
   onChange,
 }: {
   label: string;
+  value: string | undefined;
   versions: string[];
   onChange: (version: string) => void;
 }) {
@@ -101,9 +121,10 @@ function VersionDropdown({
       </label>
       <select
         id={label}
+        value={value ?? ''}
         className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
         onChange={(v) => onChange(v.target.value)}
-        defaultValue={""}
+        // defaultValue={""}
       >
         <option value="" disabled>
           Select a version

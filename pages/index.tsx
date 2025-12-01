@@ -48,8 +48,6 @@ export async function getStaticProps() {
 }
 
 export default function Home({ versions }: { versions: string[] }) {
-  const [from, setFrom] = useState<string>();
-  const [to, setTo] = useState<string>();
   const [platform, setPlatform] = useState(
     new Set<string>(allPlatforms.map((v) => v.toLowerCase())),
   );
@@ -61,8 +59,6 @@ export default function Home({ versions }: { versions: string[] }) {
 
         <Form
           versions={versions}
-          setFrom={setFrom}
-          setTo={setTo}
           platforms={platform}
           setPlatform={(value) => {
             const v = value.toLowerCase();
@@ -76,7 +72,7 @@ export default function Home({ versions }: { versions: string[] }) {
         />
         <div className="h-4"></div>
 
-        <DiffView from={from} to={to} platforms={platform} />
+        <DiffView platforms={platform} />
       </div>
     </ThemeProvider>
   );

@@ -1,6 +1,7 @@
 import { FileData, FileMap } from "@/scripts/generateSource";
 
 import { useTheme } from "next-themes";
+import { useRouter } from "next/router";
 import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Diff,
@@ -17,19 +18,19 @@ import { allPlatforms } from "./form";
 import TextButton from "./TextButton";
 
 export default function DiffView({
-  from,
-  to,
   platforms,
 }: {
-  from?: string;
-  to?: string;
   platforms?: Set<string>;
 }) {
+  const router = useRouter();
   const [oldData, setOldData] = useState<FileMap>({});
   const [newData, setNewData] = useState<FileMap>({});
+  
+  const from = `${router.query.from ?? ''}`;
+  const to = `${router.query.to ??''}`
 
   useEffect(() => {
-    if (!from) return;
+    if (!from || from === to) return;
     fetch(`/data/json/${from}.json`)
       .then((res) => res.json())
       .then((d) => {
@@ -39,7 +40,7 @@ export default function DiffView({
   }, [from]);
 
   useEffect(() => {
-    if (!to) return;
+    if (!to || from === to) return;
     fetch(`/data/json/${to}.json`)
       .then((res) => res.json())
       .then((d) => {

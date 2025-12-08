@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.1-dev.21](/compare/0.0.1-dev.20...0.0.1-dev.21) (2025-12-08)
+
+
+### Bug Fixes
+
+* upgrade next hotfix f349e32
+
 ## [0.0.1-dev.20](/compare/0.0.1-dev.19...0.0.1-dev.20) (2025-12-05)
 
 

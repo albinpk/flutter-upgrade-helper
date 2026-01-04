@@ -4,7 +4,7 @@
 
 Flutter Upgrade Helper is a web tool that helps developers compare Flutter SDK versions and identify template-level changes across platforms. It provides a clean, GitHub-style diff viewer that highlights added, removed, and updated files — making Flutter upgrades faster, safer, and more predictable.
 
-Live Demo: **https://flutter-upgrade-helper.albinpk.dev/**
+Live: **https://flutter-upgrade-helper.site/**
 
 ---
 

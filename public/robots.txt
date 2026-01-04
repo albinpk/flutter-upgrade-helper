@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://flutter-upgrade-helper.albinpk.dev/sitemap.xml
+Sitemap: https://flutter-upgrade-helper.site/sitemap.xml

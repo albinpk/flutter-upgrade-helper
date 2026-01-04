@@ -13,10 +13,7 @@ export default function Document() {
           content="Flutter upgrade tool, Flutter version comparison, Flutter SDK diff, Flutter migrate, Flutter template changes, compare Flutter versions, upgrade Flutter project"
         />
         <meta name="robots" content="index, follow" />
-        <link
-          rel="canonical"
-          href="https://flutter-upgrade-helper.albinpk.dev/"
-        />
+        <link rel="canonical" href="https://flutter-upgrade-helper.site/" />
 
         {/* Open Graph */}
         <meta property="og:title" content="Flutter Upgrade Helper" />
@@ -26,7 +23,7 @@ export default function Document() {
         />
         <meta
           property="og:url"
-          content="https://flutter-upgrade-helper.albinpk.dev/"
+          content="https://flutter-upgrade-helper.site/"
         />
         <meta property="og:type" content="website" />
         <meta
@@ -58,7 +55,7 @@ export default function Document() {
         />
         <meta
           name="twitter:image"
-          content="https://flutter-upgrade-helper.albinpk.dev/flutter-upgrade-helper-logo.png"
+          content="https://flutter-upgrade-helper.site/flutter-upgrade-helper-logo.png"
         />
 
         {/* JSON-LD - Add using dangerouslySetInnerHTML */}
@@ -69,7 +66,7 @@ export default function Document() {
               "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "Flutter Upgrade Helper",
-              url: "https://flutter-upgrade-helper.albinpk.dev/",
+              url: "https://flutter-upgrade-helper.site/",
               description:
                 "Tool to compare Flutter SDK versions and visualize project template changes.",
               applicationCategory: "DeveloperApplication",

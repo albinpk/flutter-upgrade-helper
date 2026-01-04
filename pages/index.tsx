@@ -2,6 +2,8 @@ import DiffView from "@/components/DiffView";
 import fs from "fs";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import path from "path";
 import { useState } from "react";
 import "react-diff-view/style/index.css";
@@ -49,12 +51,34 @@ export async function getStaticProps() {
 }
 
 export default function Home({ versions }: { versions: string[] }) {
+  const router = useRouter();
   const [platform, setPlatform] = useState(
     new Set<string>(allPlatforms.map((v) => v.toLowerCase())),
   );
 
+  const from = `${router.query.from ?? ""}`;
+  const to = `${router.query.to ?? ""}`;
+
+  const pageTitle =
+    from && to && from !== to
+      ? `Diff ${from} -> ${to} | Flutter Upgrade Helper`
+      : "Flutter Upgrade Helper — Upgrade Flutter Projects with Confidence";
+
+  const pageDescription =
+    from && to && from !== to
+      ? `Compare changes between Flutter SDK versions ${from} and ${to}. Visualize template updates and migrate with confidence.`
+      : "Seamlessly compare changes across Flutter SDK versions. Upgrade your Flutter projects with confidence using our diff viewer.";
+
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+      </Head>
       <div className="m-2 sm:m-8">
         <div className="flex flex-col items-center py-6 sm:py-8">
           <div className="flex items-center justify-center gap-2 sm:gap-3">

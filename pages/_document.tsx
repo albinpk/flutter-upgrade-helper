@@ -34,8 +34,23 @@ export default function Document() {
           content="https://raw.githubusercontent.com/albinpk/flutter-upgrade-helper/refs/heads/main/public/flutter-upgrade-helper-logo.png"
         />
 
+        <meta
+          name="theme-color"
+          content="#ffffff"
+          media="(prefers-color-scheme: light)"
+        />
+        <meta
+          name="theme-color"
+          content="#000000"
+          media="(prefers-color-scheme: dark)"
+        />
+
+        {/* Icons */}
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/flutter-upgrade-helper-logo.png" />
+
         {/* Twitter */}
-        {/* <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Flutter Upgrade Helper" />
         <meta
           name="twitter:description"
@@ -43,8 +58,8 @@ export default function Document() {
         />
         <meta
           name="twitter:image"
-          content="https://flutter-upgrade-helper.albinpk.dev/og-image.png"
-        /> */}
+          content="https://flutter-upgrade-helper.albinpk.dev/flutter-upgrade-helper-logo.png"
+        />
 
         {/* JSON-LD - Add using dangerouslySetInnerHTML */}
         <script

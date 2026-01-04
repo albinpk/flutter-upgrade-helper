@@ -117,8 +117,11 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="mt-8 flex items-center justify-center text-gray-500">
-          There are no changes
+        <div className="mt-12 flex flex-col items-center justify-center gap-2 text-gray-500">
+          <p className="text-lg font-medium">No changes detected</p>
+          <p className="text-sm text-gray-400">
+            Try selecting different versions or platforms.
+          </p>
         </div>
       ) : (
         filtered.map((key) => (
@@ -129,8 +132,8 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
             onExpand={() => onVisibilityChange(key)}
           >
             {oldData[key]?.content === newData[key]?.content ? (
-              <div className="p-4 pt-0 text-center text-black/40 italic dark:text-white/40">
-                No changes
+              <div className="flex items-center justify-center py-8 text-sm text-gray-400 italic dark:text-gray-500">
+                No changes in this file
               </div>
             ) : (
               <FileDiff oldValue={oldData[key]} newValue={newData[key]} />

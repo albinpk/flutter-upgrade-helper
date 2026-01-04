@@ -15,21 +15,14 @@ export default function FileTile({
   visible,
   onExpand,
 }: Props) {
-  const i = "text-black/50 dark:text-white/50";
   return (
-    <div className="mb-5 rounded-md border border-solid border-black/20 dark:border-white/20">
-      <div className="sticky top-0 flex flex-row items-center gap-2 rounded-md bg-gray-100 dark:bg-gray-900">
+    <div className="mb-4 overflow-clip rounded-lg border border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900">
+      <div className="sticky top-0 flex flex-row items-center gap-3 bg-gray-50 px-3 py-2 dark:bg-gray-800">
         <IconButton
-          icon={
-            visible ? (
-              <FaAngleUp className={i} />
-            ) : (
-              <FaAngleDown className={i} />
-            )
-          }
+          icon={visible ? <FaAngleUp /> : <FaAngleDown />}
           onClick={onExpand}
         />
-        <p className="break-all">{filePath}</p>
+        <p className="break-all text-gray-700 dark:text-gray-300">{filePath}</p>
         <div className="mr-2">
           <SmallButton
             Icon={FaRegCopy}
@@ -39,7 +32,11 @@ export default function FileTile({
           />
         </div>
       </div>
-      {visible && <div className="mt-4">{children}</div>}
+      {visible && (
+        <div className="border-t border-gray-100 dark:border-gray-800">
+          {children}
+        </div>
+      )}
     </div>
   );
 }

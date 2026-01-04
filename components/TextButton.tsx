@@ -8,7 +8,7 @@ export default function TextButton({ label, onClick }: Props) {
     <button
       type="button"
       onClick={onClick}
-      className="text-heading box-border rounded-md border border-transparent bg-transparent px-4 py-2.5 text-sm leading-5 font-medium hover:bg-black/10 dark:hover:bg-white/10"
+      className="rounded-md border border-transparent bg-transparent px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
     >
       {label}
     </button>

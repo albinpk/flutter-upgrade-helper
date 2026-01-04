@@ -1,5 +1,13 @@
 # Changelog
 
+# [0.1.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.22...0.1.0) (2026-01-04)
+
+
+### Features
+
+* change for seo ([fef8fbe](https://github.com/albinpk/flutter-upgrade-helper/commit/fef8fbe9e3a13f4e098c599f6d1eba20ce38481d))
+* enhance form UI with platform and comparison icons, refined layout, and updated title. ([17e65ca](https://github.com/albinpk/flutter-upgrade-helper/commit/17e65ca833915d7ee683a1c0608875a5a530e7cc))
+
 ## [0.0.1-dev.22](/compare/0.0.1-dev.21...0.0.1-dev.22) (2025-12-12)
 
 

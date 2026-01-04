@@ -1,4 +1,13 @@
 import { useRouter } from "next/router";
+import { BiGitCompare } from "react-icons/bi";
+import {
+  FaAndroid,
+  FaApple,
+  FaGlobe,
+  FaLinux,
+  FaWindows,
+} from "react-icons/fa6";
+import { HiChevronDown } from "react-icons/hi2";
 
 export const allPlatforms = [
   "Android",
@@ -8,6 +17,32 @@ export const allPlatforms = [
   "Linux",
   "Web",
 ];
+
+const PlatformIcon = ({
+  name,
+  className,
+}: {
+  name: string;
+  className?: string;
+}) => {
+  const props = { className };
+  switch (name.toLowerCase()) {
+    case "android":
+      return <FaAndroid {...props} />;
+    case "ios":
+      return <FaApple {...props} />;
+    case "macos":
+      return <FaApple {...props} />;
+    case "windows":
+      return <FaWindows {...props} />;
+    case "linux":
+      return <FaLinux {...props} />;
+    case "web":
+      return <FaGlobe {...props} />;
+    default:
+      return null;
+  }
+};
 
 export default function Form({
   versions,
@@ -23,79 +58,68 @@ export default function Form({
   const to = `${router.query.to ?? ""}`;
 
   return (
-    <form className="mx-auto max-w-sm">
-      <div className="flex gap-4">
-        <div className="flex-1">
-          <VersionDropdown
-            label="Current version"
-            value={from}
-            versions={versions}
-            onChange={(v) => {
-              router.replace({
-                query: {
-                  ...router.query,
-                  from: v,
-                },
-              });
-            }}
-          />
-        </div>
-        <div className="flex-1">
-          <VersionDropdown
-            label="New version"
-            value={to}
-            versions={versions}
-            onChange={(v) => {
-              router.replace({
-                query: {
-                  ...router.query,
-                  to: v,
-                },
-              });
-            }}
-          />
-        </div>
-      </div>
+    <div className="mx-auto w-full max-w-4xl">
+      <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex flex-col gap-5"
+        >
+          {/* Top Row: Version Selection */}
+          <div className="flex flex-col gap-4 md:flex-row md:items-end">
+            <div className="flex-1">
+              <VersionDropdown
+                label="Base Version"
+                value={from}
+                versions={versions}
+                placeholder="Select base"
+                onChange={(v) => {
+                  router.replace({
+                    query: { ...router.query, from: v },
+                  });
+                }}
+              />
+            </div>
 
-      <div className="mt-5 flex flex-wrap justify-center gap-2">
-        {allPlatforms.map((platform) => (
-          <Check
-            key={platform}
-            platform={platform}
-            checked={platforms.has(platform.toLowerCase())}
-            onChange={setPlatform}
-          />
-        ))}
-      </div>
-    </form>
-  );
-}
+            {/* Comparison Icon */}
+            <div className="flex items-center justify-center pb-2 md:pb-3">
+              <div className="text-gray-400 dark:text-gray-500">
+                <BiGitCompare size={24} />
+              </div>
+            </div>
 
-function Check({
-  platform,
-  checked,
-  onChange,
-}: {
-  platform: string;
-  checked: boolean;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <div className="me-4 flex items-center">
-      <input
-        id={platform}
-        type="checkbox"
-        checked={checked}
-        value={platform}
-        className="h-4 w-4 rounded-sm border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600"
-        onChange={(e) => onChange(e.target.value)}
-      />
-      <label
-        htmlFor={platform}
-        className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-      >
-        {platform}
-      </label>
+            <div className="flex-1">
+              <VersionDropdown
+                label="Target Version"
+                value={to}
+                versions={versions}
+                placeholder="Select target"
+                onChange={(v) => {
+                  router.replace({
+                    query: { ...router.query, to: v },
+                  });
+                }}
+              />
+            </div>
+          </div>
+
+          {/* Bottom Row: Platform Selection */}
+          <div className="flex flex-col gap-3 pt-2 md:flex-row md:items-center">
+            <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Filter Platforms:
+            </label>
+            <div className="flex flex-wrap gap-2">
+              {allPlatforms.map((platform) => (
+                <PlatformToggle
+                  key={platform}
+                  platform={platform}
+                  checked={platforms.has(platform.toLowerCase())}
+                  onChange={() => setPlatform(platform)}
+                />
+              ))}
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
@@ -105,36 +129,66 @@ function VersionDropdown({
   value,
   versions,
   onChange,
+  placeholder,
 }: {
   label: string;
   value: string | undefined;
   versions: string[];
   onChange: (version: string) => void;
+  placeholder: string;
 }) {
   return (
-    <div className="">
-      <label
-        htmlFor={label}
-        className="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
-      >
+    <div className="group w-full">
+      <label className="mb-1 ml-1 block text-[10px] font-semibold tracking-wider text-gray-500 uppercase dark:text-gray-400">
         {label}
       </label>
-      <select
-        id={label}
-        value={value ?? ""}
-        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-        onChange={(v) => onChange(v.target.value)}
-        // defaultValue={""}
-      >
-        <option value="" disabled>
-          Select a version
-        </option>
-        {versions.map((v) => (
-          <option key={v} value={v}>
-            {v}
+      <div className="relative">
+        <select
+          value={value ?? ""}
+          onChange={(e) => onChange(e.target.value)}
+          className="peer w-full appearance-none rounded-lg border border-gray-200 bg-white py-2 pr-8 pl-3 font-mono text-sm text-gray-900 shadow-sm transition-all outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 dark:border-gray-700 dark:bg-gray-800/50 dark:text-white"
+        >
+          <option value="" disabled>
+            {placeholder}
           </option>
-        ))}
-      </select>
+          {versions.map((v) => (
+            <option key={v} value={v}>
+              {v}
+            </option>
+          ))}
+        </select>
+        <div className="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 text-gray-400 transition-colors peer-focus:text-blue-500">
+          <HiChevronDown size={16} />
+        </div>
+      </div>
     </div>
+  );
+}
+
+function PlatformToggle({
+  platform,
+  checked,
+  onChange,
+}: {
+  platform: string;
+  checked: boolean;
+  onChange: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onChange}
+      className={`relative flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all duration-200 ${
+        checked
+          ? "border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-500/30"
+          : "border-gray-200 bg-white text-gray-600 hover:border-gray-300 hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800/50 dark:text-gray-300 dark:hover:border-gray-600 dark:hover:bg-gray-700/50"
+      } `}
+    >
+      <PlatformIcon
+        name={platform}
+        className={checked ? "text-white" : "text-gray-400 dark:text-gray-500"}
+      />
+      <span>{platform}</span>
+    </button>
   );
 }

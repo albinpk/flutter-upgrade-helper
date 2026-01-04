@@ -5,6 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import path from "path";
 import { useState } from "react";
 import "react-diff-view/style/index.css";
+import { SiFlutter } from "react-icons/si";
 import Form, { allPlatforms } from "../components/form";
 
 const geistSans = Geist({
@@ -55,7 +56,14 @@ export default function Home({ versions }: { versions: string[] }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <div className="m-2 sm:m-8">
-        <div className="mb-6 text-center text-2xl">Flutter Upgrade Helper</div>
+        <div className="flex flex-col items-center py-6 sm:py-8">
+          <div className="flex items-center justify-center gap-2 sm:gap-3">
+            <SiFlutter className="h-6 w-6 text-[#02569B] sm:h-8 sm:w-8 dark:text-[#4AC3E7]" />
+            <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl dark:text-white">
+              Flutter Upgrade Helper
+            </h1>
+          </div>
+        </div>
 
         <Form
           versions={versions}

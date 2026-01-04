@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/albinpk/flutter-upgrade-helper/compare/0.1.0...0.1.1) (2026-01-04)
+
+
+### Features
+
+* update project domain to flutter-upgrade-helper.site ([8658e50](https://github.com/albinpk/flutter-upgrade-helper/commit/8658e502ef3d51b22a969f9ba0089f08c855148c))
+
 # [0.1.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.0.1-dev.22...0.1.0) (2026-01-04)
 
 

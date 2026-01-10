@@ -1,5 +1,12 @@
 # Changelog
 
+# [0.2.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.1.1...0.2.0) (2026-01-10)
+
+
+### Features
+
+* add flutter `3.38.6` ([ebd87c0](https://github.com/albinpk/flutter-upgrade-helper/commit/ebd87c0eb6331f675293c194b1567a56d06e07b8))
+
 ## [0.1.1](https://github.com/albinpk/flutter-upgrade-helper/compare/0.1.0...0.1.1) (2026-01-04)
 
 

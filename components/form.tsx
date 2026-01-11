@@ -65,7 +65,7 @@ export default function Form({
           className="flex flex-col gap-5"
         >
           {/* Top Row: Version Selection */}
-          <div className="flex flex-col gap-4 md:flex-row md:items-end">
+          <div className="flex flex-row gap-4 md:items-end">
             <div className="flex-1">
               <VersionDropdown
                 label="Base Version"

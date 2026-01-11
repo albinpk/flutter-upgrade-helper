@@ -4,8 +4,9 @@ import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { Octokit } from "octokit";
 import path from "path";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-diff-view/style/index.css";
 import { SiFlutter } from "react-icons/si";
 import Form, { allPlatforms } from "../components/form";
@@ -50,11 +51,41 @@ export async function getStaticProps() {
   };
 }
 
+export const octokit = new Octokit({});
+
+// let test = true;
+
 export default function Home({ versions }: { versions: string[] }) {
   const router = useRouter();
   const [platform, setPlatform] = useState(
     new Set<string>(allPlatforms.map((v) => v.toLowerCase())),
   );
+
+  const [tags, setTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    const fetchTags = async () => {
+      const get = async (page: number): Promise<string[]> => {
+        const res = await octokit.rest.repos.listTags({
+          owner: "albinpk",
+          repo: "flutter-upgrade-helper-diff",
+          per_page: 100, // this is the max
+          page: page,
+        });
+        return res.data
+          .filter((v) => v.name.startsWith("sdk-"))
+          .map((v) => v.name.substring(4));
+      };
+
+      let page = 1;
+      while (true) {
+        const list = await get(page++);
+        if (list.length === 0) break;
+        setTags((o) => [...o, ...list]);
+      }
+    };
+    fetchTags();
+  }, []);
 
   const from = `${router.query.from ?? ""}`;
   const to = `${router.query.to ?? ""}`;
@@ -90,11 +121,11 @@ export default function Home({ versions }: { versions: string[] }) {
         </div>
 
         <Form
-          versions={versions}
+          versions={tags}
           platforms={platform}
           setPlatform={(value) => {
             const v = value.toLowerCase();
-            setPlatform((o) => {
+            setPlatform((platform) => {
               const n = new Set(platform);
               if (n.has(v)) n.delete(v);
               else n.add(v);

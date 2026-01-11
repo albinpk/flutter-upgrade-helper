@@ -23,35 +23,6 @@ function readFilesRecursive(dir: string, baseDir: string) {
     if (entry.isDirectory()) {
       result = result.concat(readFilesRecursive(fullPath, baseDir));
     } else if (entry.isFile()) {
-      const ext = path.extname(entry.name).toLowerCase();
-
-      // TODO: fix
-      const textExtensions: string[] = [
-        // ".txt",
-        // ".json",
-        // ".yaml",
-        // ".yml",
-        // ".md",
-        // ".dart",
-        // ".js",
-        // ".ts",
-        // ".jsx",
-        // ".tsx",
-        // ".html",
-        // ".css",
-        // ".scss",
-        // ".xml",
-        // ".sh",
-        // ".bat",
-        // ".gitignore",
-        // ".c",
-        // ".cpp",
-        // ".h",
-        // ".hpp",
-      ];
-
-      if (textExtensions.includes(ext)) continue;
-
       const content = fs.readFileSync(fullPath, "utf8");
       result.push({
         path: relativePath.replace(/\\/g, "/"), // normalize for Windows

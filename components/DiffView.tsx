@@ -23,10 +23,18 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
   const from = `${router.query.from ?? ""}`;
   const to = `${router.query.to ?? ""}`;
 
+  const getCacheKey = (from: string, to: string) => `diff-${from}-${to}`;
+
   useEffect(() => {
     if (!from || !to) return;
     if (from === to) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    const cachedDiff = localStorage.getItem(getCacheKey(from, to));
+    if (cachedDiff) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPatch(cachedDiff);
+      return;
+    }
+
     setIsLoading(true);
     octokit.rest.repos
       .compareCommits({
@@ -36,7 +44,10 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
         head: `sdk-${to}`,
         mediaType: { format: "diff" },
       })
-      .then((res) => setPatch(`${res.data}`))
+      .then((res) => {
+        localStorage.setItem(getCacheKey(from, to), `${res.data}`);
+        return setPatch(`${res.data}`);
+      })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
   }, [from, to]);

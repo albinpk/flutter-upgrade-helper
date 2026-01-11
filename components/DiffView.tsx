@@ -18,6 +18,7 @@ import TextButton from "./TextButton";
 export default function DiffView({ platforms }: { platforms?: Set<string> }) {
   const router = useRouter();
   const [patch, setPatch] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const from = `${router.query.from ?? ""}`;
   const to = `${router.query.to ?? ""}`;
@@ -25,6 +26,8 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
   useEffect(() => {
     if (!from || !to) return;
     if (from === to) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsLoading(true);
     octokit.rest.repos
       .compareCommits({
         owner: "albinpk",
@@ -34,7 +37,8 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
         mediaType: { format: "diff" },
       })
       .then((res) => setPatch(`${res.data}`))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(() => setIsLoading(false));
   }, [from, to]);
 
   type Visibility = { [key: string]: boolean };
@@ -76,7 +80,16 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
       </div>
     );
 
-  const files = patch ? parseDiff(patch, { nearbySequences: "zip" }) : [];
+  if (isLoading)
+    return (
+      <div className="mt-8 mb-40 flex items-center justify-center">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-blue-500" />
+      </div>
+    );
+
+  if (!patch) return null;
+
+  const files = parseDiff(patch, { nearbySequences: "zip" });
 
   const ignoredFiles = [".metadata"];
   const ignoredExtensions = [".png", ".ico"];

@@ -65,13 +65,14 @@ export default function Home({ versions }: { versions: string[] }) {
   const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
+    const perPage = 100; // this is the max allowed by github
     const fetchTags = async () => {
       const get = async (page: number): Promise<string[]> => {
         try {
           const res = await octokit.rest.repos.listTags({
             owner: "albinpk",
             repo: "flutter-upgrade-helper-diff",
-            per_page: 100, // this is the max
+            per_page: perPage,
             page: page,
           });
           return res.data
@@ -88,6 +89,7 @@ export default function Home({ versions }: { versions: string[] }) {
         const list = await get(page++);
         if (list.length === 0) break;
         setTags((o) => [...o, ...list]);
+        if (list.length < perPage) break;
       }
     };
     fetchTags();

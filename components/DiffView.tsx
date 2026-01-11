@@ -25,17 +25,16 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
   useEffect(() => {
     if (!from || !to) return;
     if (from === to) return;
-    const get = async () => {
-      const diff = await octokit.rest.repos.compareCommits({
+    octokit.rest.repos
+      .compareCommits({
         owner: "albinpk",
         repo: "flutter-upgrade-helper-diff",
         base: `sdk-${from}`,
         head: `sdk-${to}`,
         mediaType: { format: "diff" },
-      });
-      setPatch(`${diff.data}`);
-    };
-    get();
+      })
+      .then((res) => setPatch(`${res.data}`))
+      .catch((err) => console.error(err));
   }, [from, to]);
 
   type Visibility = { [key: string]: boolean };

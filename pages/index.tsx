@@ -3,6 +3,7 @@ import fs from "fs";
 import { ThemeProvider } from "next-themes";
 import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { Octokit } from "octokit";
 import path from "path";
@@ -66,15 +67,20 @@ export default function Home({ versions }: { versions: string[] }) {
   useEffect(() => {
     const fetchTags = async () => {
       const get = async (page: number): Promise<string[]> => {
-        const res = await octokit.rest.repos.listTags({
-          owner: "albinpk",
-          repo: "flutter-upgrade-helper-diff",
-          per_page: 100, // this is the max
-          page: page,
-        });
-        return res.data
-          .filter((v) => v.name.startsWith("sdk-"))
-          .map((v) => v.name.substring(4));
+        try {
+          const res = await octokit.rest.repos.listTags({
+            owner: "albinpk",
+            repo: "flutter-upgrade-helper-diff",
+            per_page: 100, // this is the max
+            page: page,
+          });
+          return res.data
+            .filter((v) => v.name.startsWith("sdk-"))
+            .map((v) => v.name.substring(4));
+        } catch (err) {
+          console.error(err);
+          return [];
+        }
       };
 
       let page = 1;
@@ -115,7 +121,7 @@ export default function Home({ versions }: { versions: string[] }) {
           <div className="flex items-center justify-center gap-2 sm:gap-3">
             <SiFlutter className="h-6 w-6 text-[#02569B] sm:h-8 sm:w-8 dark:text-[#4AC3E7]" />
             <h1 className="text-xl font-bold tracking-tight text-gray-900 sm:text-2xl md:text-3xl dark:text-white">
-              Flutter Upgrade Helper
+              <Link href="/">Flutter Upgrade Helper</Link>
             </h1>
           </div>
         </div>

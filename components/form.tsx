@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { BiGitCompare } from "react-icons/bi";
 import {
   FaAndroid,
@@ -57,6 +58,33 @@ export default function Form({
   const from = `${router.query.from ?? ""}`;
   const to = `${router.query.to ?? ""}`;
 
+  const [fullVersion, setFullVersion] = useState(versions);
+  const [fromList, setFromList] = useState(versions);
+  const [toList, setToList] = useState(versions);
+
+  // versions list is paginated
+  useEffect(() => {
+    setFullVersion(versions);
+  }, [versions]);
+
+  useEffect(() => {
+    const fromIdx = fullVersion.indexOf(from);
+    if (fromIdx >= 0) {
+      setToList(fullVersion.slice(0, fromIdx));
+    } else {
+      setToList(fullVersion.slice(0, fullVersion.length - 1)); // remove first version
+    }
+  }, [from, fullVersion]);
+
+  useEffect(() => {
+    const toIdx = fullVersion.indexOf(to);
+    if (toIdx >= 0) {
+      setFromList(fullVersion.slice(toIdx + 1));
+    } else {
+      setFromList(fullVersion.slice(1)); // remove last version
+    }
+  }, [to, fullVersion]);
+
   return (
     <div className="mx-auto w-full max-w-4xl">
       <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-800 dark:bg-gray-900/50">
@@ -70,8 +98,8 @@ export default function Form({
               <VersionDropdown
                 label="Base Version"
                 value={from}
-                versions={versions}
-                placeholder="Select base"
+                versions={fromList}
+                placeholder={from.length === 0 ? "Select base" : from}
                 onChange={(v) => {
                   router.replace({
                     query: { ...router.query, from: v },
@@ -91,8 +119,8 @@ export default function Form({
               <VersionDropdown
                 label="Target Version"
                 value={to}
-                versions={versions}
-                placeholder="Select target"
+                versions={toList}
+                placeholder={to.length === 0 ? "Select target" : to}
                 onChange={(v) => {
                   router.replace({
                     query: { ...router.query, to: v },

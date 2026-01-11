@@ -62,14 +62,20 @@ export default function Form({
   const [fromList, setFromList] = useState(versions);
   const [toList, setToList] = useState(versions);
 
+  const [hideBugfixes, setHideBugfixes] = useState(false);
+
   // versions list is paginated
   useEffect(() => {
-    setFullVersion(versions);
-  }, [versions]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setFullVersion(
+      hideBugfixes ? versions.filter((v) => v.endsWith(".0")) : versions,
+    );
+  }, [versions, hideBugfixes]);
 
   useEffect(() => {
     const fromIdx = fullVersion.indexOf(from);
     if (fromIdx >= 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setToList(fullVersion.slice(0, fromIdx));
     } else {
       setToList(fullVersion.slice(0, fullVersion.length - 1)); // remove first version
@@ -79,6 +85,7 @@ export default function Form({
   useEffect(() => {
     const toIdx = fullVersion.indexOf(to);
     if (toIdx >= 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setFromList(fullVersion.slice(toIdx + 1));
     } else {
       setFromList(fullVersion.slice(1)); // remove last version
@@ -92,6 +99,23 @@ export default function Form({
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-5"
         >
+          {/* Hide Bugfixes */}
+          <div className="flex items-center gap-2">
+            <input
+              id="hide-bugfixes"
+              type="checkbox"
+              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:ring-offset-gray-900"
+              checked={hideBugfixes}
+              onChange={(e) => setHideBugfixes(e.target.checked)}
+            />
+            <label
+              htmlFor="hide-bugfixes"
+              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            >
+              Hide bugfix releases
+            </label>
+          </div>
+
           {/* Top Row: Version Selection */}
           <div className="flex flex-row gap-4 md:items-end">
             <div className="flex-1">
@@ -99,7 +123,7 @@ export default function Form({
                 label="Base Version"
                 value={from}
                 versions={fromList}
-                placeholder={from.length === 0 ? "Select base" : from}
+                placeholder="Select base"
                 onChange={(v) => {
                   router.replace({
                     query: { ...router.query, from: v },
@@ -120,7 +144,7 @@ export default function Form({
                 label="Target Version"
                 value={to}
                 versions={toList}
-                placeholder={to.length === 0 ? "Select target" : to}
+                placeholder="Select target"
                 onChange={(v) => {
                   router.replace({
                     query: { ...router.query, to: v },

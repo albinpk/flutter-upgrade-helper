@@ -64,6 +64,11 @@ export default function Form({
 
   const [hideBugfixes, setHideBugfixes] = useState(false);
 
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHideBugfixes(localStorage.getItem("hideBugfixes") === "true");
+  }, []);
+
   // versions list is paginated
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -106,7 +111,13 @@ export default function Form({
               type="checkbox"
               className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:ring-offset-gray-900"
               checked={hideBugfixes}
-              onChange={(e) => setHideBugfixes(e.target.checked)}
+              onChange={(e) => {
+                setHideBugfixes(e.target.checked);
+                localStorage.setItem(
+                  "hideBugfixes",
+                  e.target.checked.toString(),
+                );
+              }}
             />
             <label
               htmlFor="hide-bugfixes"

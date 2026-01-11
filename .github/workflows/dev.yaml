@@ -1,0 +1,28 @@
+name: dev
+
+on:
+    push:
+        branches:
+            - git-diff-ignore
+
+permissions:
+    contents: write
+jobs:
+    dev:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+              with:
+                  token: ${{ secrets.FLUTTER_DIFF }}
+                  repository: albinpk/flutter-upgrade-helper-diff
+
+            - run: |
+                  git config --global user.name "Albin"
+                  git config --global user.email "56157868+albinpk@users.noreply.github.com"
+
+            - run: |
+                  curl -fsSL https://fvm.app/install.sh | bash
+                  echo "/home/runner/fvm/bin" >> $GITHUB_PATH
+
+              #   TODO:
+            - run: curl -fsSL https://github.com/albinpk/flutter-upgrade-helper/blob/git-diff/scripts/dev.sh?raw=true | bash

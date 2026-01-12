@@ -54,8 +54,6 @@ export async function getStaticProps() {
 
 export const octokit = new Octokit({});
 
-// let test = true;
-
 export default function Home({ versions }: { versions: string[] }) {
   const router = useRouter();
   const [platform, setPlatform] = useState(
@@ -84,16 +82,34 @@ export default function Home({ versions }: { versions: string[] }) {
         }
       };
 
-      let page = 1;
+      const cachedTags = JSON.parse(
+        localStorage.getItem("tags") ?? "[]",
+      ) as string[];
+
+      let page = 0;
       while (true) {
-        const list = await get(page++);
+        const list = await get(++page);
         if (list.length === 0) break;
+
+        // if we have cached tags, we only need the first page (recent tags)
+        if (page === 1) {
+          if (cachedTags.length > 0) {
+            setTags(() => [...new Set([...list, ...cachedTags])]);
+            break;
+          }
+        }
+
         setTags((o) => [...o, ...list]);
         if (list.length < perPage) break;
       }
     };
+
     fetchTags();
   }, []);
+
+  useEffect(() => {
+    if (tags.length > 0) localStorage.setItem("tags", JSON.stringify(tags));
+  }, [tags]);
 
   const from = `${router.query.from ?? ""}`;
   const to = `${router.query.to ?? ""}`;

@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import GitHubButton from "react-github-btn";
 import { BiGitCompare } from "react-icons/bi";
 import {
   FaAndroid,
@@ -104,27 +105,39 @@ export default function Form({
           onSubmit={(e) => e.preventDefault()}
           className="flex flex-col gap-5"
         >
-          {/* Hide Bugfixes */}
-          <div className="flex items-center gap-2">
-            <input
-              id="hide-bugfixes"
-              type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:ring-offset-gray-900"
-              checked={hideBugfixes}
-              onChange={(e) => {
-                setHideBugfixes(e.target.checked);
-                localStorage.setItem(
-                  "hideBugfixes",
-                  e.target.checked.toString(),
-                );
-              }}
-            />
-            <label
-              htmlFor="hide-bugfixes"
-              className="text-sm font-medium text-gray-700 dark:text-gray-300"
+          <div className="flex items-start justify-between">
+            {/* Hide Bugfixes */}
+            <div className="flex items-center gap-2">
+              <input
+                id="hide-bugfixes"
+                type="checkbox"
+                className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:ring-offset-gray-900"
+                checked={hideBugfixes}
+                onChange={(e) => {
+                  setHideBugfixes(e.target.checked);
+                  localStorage.setItem(
+                    "hideBugfixes",
+                    e.target.checked.toString(),
+                  );
+                }}
+              />
+              <label
+                htmlFor="hide-bugfixes"
+                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+              >
+                Hide bugfix releases
+              </label>
+            </div>
+
+            <GitHubButton
+              href="https://github.com/albinpk/flutter-upgrade-helper"
+              data-color-scheme="no-preference: light; light: light; dark: dark;"
+              data-icon="octicon-star"
+              data-show-count="true"
+              aria-label="Star albinpk/flutter-upgrade-helper on GitHub"
             >
-              Hide bugfix releases
-            </label>
+              Star
+            </GitHubButton>
           </div>
 
           {/* Top Row: Version Selection */}

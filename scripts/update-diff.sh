@@ -2,6 +2,11 @@
 
 v=${1}
 
+if [ -z "$v" ]; then
+    echo "Error: Missing flutter version argument."
+    exit 1
+fi
+
 echo "Version: $v"
 
 git rm -rf .

@@ -1,4 +1,4 @@
-name: new_version
+name: Add new flutter version
 
 on:
     workflow_dispatch:
@@ -11,24 +11,40 @@ permissions:
     contents: write
 
 jobs:
-    dev:
+    create_and_push:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v4
+            - name: Checkout
+              uses: actions/checkout@v4
               with:
                   token: ${{ secrets.FLUTTER_DIFF }}
                   repository: albinpk/flutter-upgrade-helper-diff
 
-            - run: |
+            - name: Configure git
+              run: |
                   git config --global user.name "Albin"
                   git config --global user.email "56157868+albinpk@users.noreply.github.com"
 
-            - run: |
+            - name: Check if SDK tag already exists
+              shell: bash
+              run: |
+                  git fetch --tags
+                  TAG="sdk-${{inputs.version}}"
+
+                  if git tag --list "$TAG" | grep -q .; then
+                    echo "Error: Tag $TAG already exists."
+                    exit 1
+                  fi
+
+            - name: Install fvm
+              run: |
                   curl -fsSL https://fvm.app/install.sh | bash
                   echo "/home/runner/fvm/bin" >> $GITHUB_PATH
 
-            - run: fvm install ${{ inputs.version }}
+            - name: Install flutter version
+              run: fvm install ${{ inputs.version }}
 
-            - run: >
+            - name: Create app and push
+              run: |
                   curl -fsSL https://github.com/albinpk/flutter-upgrade-helper/blob/main/scripts/update-diff.sh?raw=true
                   | bash -s -- ${{ inputs.version }}

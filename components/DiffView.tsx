@@ -12,7 +12,7 @@ import FileTile from "./FileTile";
 
 import { octokit } from "@/pages";
 import { useRouter } from "next/router";
-import { allPlatforms } from "./form";
+import { allPlatforms } from "./Form";
 import TextButton from "./TextButton";
 
 export default function DiffView({ platforms }: { platforms?: Set<string> }) {

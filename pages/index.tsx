@@ -8,7 +8,7 @@ import { Octokit } from "octokit";
 import { useEffect, useState } from "react";
 import "react-diff-view/style/index.css";
 import { SiFlutter } from "react-icons/si";
-import Form, { allPlatforms } from "../components/form";
+import Form, { allPlatforms } from "../components/Form";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

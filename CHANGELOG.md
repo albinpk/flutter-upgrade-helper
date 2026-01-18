@@ -1,5 +1,25 @@
 # Changelog
 
+# [1.0.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.3.0...1.0.0) (2026-01-18)
+
+
+### Bug Fixes
+
+* add version range validation and some error handling ([fa0f182](https://github.com/albinpk/flutter-upgrade-helper/commit/fa0f182aaeedf53bed15d87cf1d08c8d1a78e2f8))
+* file naming ([90dc063](https://github.com/albinpk/flutter-upgrade-helper/commit/90dc0637e674bb4f6a2a5a66ffd8f590d6c6e0c9))
+* store "hideBugfixes" state ([b1d0b18](https://github.com/albinpk/flutter-upgrade-helper/commit/b1d0b18722673a14da2e02418bc48bb55ddfd2aa))
+
+
+### Features
+
+* add diff caching ([c5b4958](https://github.com/albinpk/flutter-upgrade-helper/commit/c5b49589e12eded2b63bf1fb251d63b4dda5027c))
+* add file change type badge ([a823560](https://github.com/albinpk/flutter-upgrade-helper/commit/a82356034ffc3b1e8bd75569a5759768f73707ac))
+* add filter for bugfix versions ([e5cc4db](https://github.com/albinpk/flutter-upgrade-helper/commit/e5cc4dba962e1643c8850eca47ba65720a7decf3))
+* add github star button ([a41ef4c](https://github.com/albinpk/flutter-upgrade-helper/commit/a41ef4c14de8a61e8793d4439cf24bb0f8a15dfd))
+* add loading spinner ([bd2d813](https://github.com/albinpk/flutter-upgrade-helper/commit/bd2d813b4ddae01dbc99a7ca6e61200061cc4c8c))
+* cache tags ([22a6587](https://github.com/albinpk/flutter-upgrade-helper/commit/22a6587e85d94ed6687a62021d2fa2969c043b11))
+* using github diff ([58acfd8](https://github.com/albinpk/flutter-upgrade-helper/commit/58acfd8d608db879af4de9a5ca0145d4289db339))
+
 # [0.3.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.2.0...0.3.0) (2026-01-15)
 
 

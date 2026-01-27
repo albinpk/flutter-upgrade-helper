@@ -27,8 +27,8 @@ export default function Home() {
   const [platform, setPlatform] = useState(
     new Set<string>(allPlatforms.map((v) => v.toLowerCase())),
   );
-
   const [tags, setTags] = useState<string[]>([]);
+  const [prompt, setPrompt] = useState<string | null>(null);
 
   useEffect(() => {
     const perPage = 100; // this is the max allowed by github
@@ -115,6 +115,7 @@ export default function Home() {
         <Form
           versions={tags}
           platforms={platform}
+          prompt={prompt}
           setPlatform={(value) => {
             const v = value.toLowerCase();
             setPlatform((platform) => {
@@ -127,7 +128,7 @@ export default function Home() {
         />
         <div className="h-4"></div>
 
-        <DiffView platforms={platform} />
+        <DiffView platforms={platform} setPrompt={setPrompt} />
       </div>
     </ThemeProvider>
   );

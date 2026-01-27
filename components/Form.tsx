@@ -5,8 +5,10 @@ import { BiGitCompare } from "react-icons/bi";
 import {
   FaAndroid,
   FaApple,
+  FaCheck,
   FaGlobe,
   FaLinux,
+  FaWandMagicSparkles,
   FaWindows,
 } from "react-icons/fa6";
 import { HiChevronDown } from "react-icons/hi2";
@@ -50,10 +52,12 @@ export default function Form({
   versions,
   platforms,
   setPlatform,
+  prompt,
 }: {
   versions: string[];
   platforms: Set<string>;
   setPlatform: (platforms: string) => void;
+  prompt: string | null;
 }) {
   const router = useRouter();
   const from = `${router.query.from ?? ""}`;
@@ -179,7 +183,7 @@ export default function Form({
           </div>
 
           {/* Bottom Row: Platform Selection */}
-          <div className="flex flex-col gap-3 pt-2 md:flex-row md:items-center">
+          <div className="mb-2 flex flex-col gap-3 pt-2 md:flex-row md:items-center">
             <label className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Filter Platforms:
             </label>
@@ -194,6 +198,9 @@ export default function Form({
               ))}
             </div>
           </div>
+
+          {/* Prompt button */}
+          {prompt && <PromptButton prompt={prompt} />}
         </form>
       </div>
     </div>
@@ -268,3 +275,49 @@ function PlatformToggle({
     </button>
   );
 }
+
+const PromptButton = ({ prompt }: { prompt: string }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(prompt);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      disabled={copied}
+      className={`group relative w-full overflow-hidden rounded-lg p-px transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none active:scale-[0.98] dark:focus:ring-offset-gray-900 ${
+        copied
+          ? "bg-emerald-500 ring-emerald-500/20"
+          : "bg-linear-to-r from-blue-400 via-blue-600 to-indigo-600 shadow-sm hover:shadow-md hover:shadow-blue-500/20"
+      }`}
+    >
+      <div
+        className={`flex h-full w-full items-center justify-center gap-2 rounded-[7px] bg-white px-3 py-2 text-sm font-medium transition-all duration-300 dark:bg-gray-900 ${
+          copied
+            ? "bg-emerald-50 text-emerald-600 dark:bg-gray-900 dark:text-emerald-400"
+            : "text-gray-600 group-hover:bg-transparent group-hover:text-white dark:text-gray-300"
+        }`}
+      >
+        {copied ? (
+          <>
+            <FaCheck className="text-lg" />
+            <span>Copied to Clipboard</span>
+          </>
+        ) : (
+          <>
+            <FaWandMagicSparkles className="text-blue-600 transition-colors group-hover:text-white dark:text-blue-400" />
+            <span>Copy Upgrade Prompt</span>
+          </>
+        )}
+      </div>
+    </button>
+  );
+};

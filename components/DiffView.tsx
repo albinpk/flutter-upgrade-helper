@@ -11,13 +11,23 @@ import {
 import FileTile from "./FileTile";
 
 import { octokit } from "@/pages";
+import { generateAiPrompt } from "@/utils/generateAiPrompt";
 import { useRouter } from "next/router";
 import { allPlatforms } from "./Form";
 import TextButton from "./TextButton";
 
-export default function DiffView({ platforms }: { platforms?: Set<string> }) {
+export const ignoredFiles = [".metadata", "pubspec.lock"];
+export const ignoredExtensions = [".png", ".ico"];
+
+export default function DiffView({
+  platforms,
+  setPrompt,
+}: {
+  platforms?: Set<string>;
+  setPrompt: (prompt: string | null) => void;
+}) {
   const router = useRouter();
-  const [patch, setPatch] = useState<string>("");
+  const [hunks, setHunks] = useState<HunkFile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const from = `${router.query.from ?? ""}`;
@@ -25,13 +35,18 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
 
   const getCacheKey = (from: string, to: string) => `diff-${from}-${to}`;
 
+  const handleDiff = (rawDiff: string) => {
+    setHunks(parseDiff(rawDiff, { nearbySequences: "zip" }));
+    setPrompt(generateAiPrompt(rawDiff, from, to));
+  };
+
   useEffect(() => {
     if (!from || !to) return;
     if (from === to) return;
     const cachedDiff = localStorage.getItem(getCacheKey(from, to));
     if (cachedDiff) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPatch(cachedDiff);
+      handleDiff(cachedDiff);
       return;
     }
 
@@ -46,7 +61,7 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
       })
       .then((res) => {
         localStorage.setItem(getCacheKey(from, to), `${res.data}`);
-        return setPatch(`${res.data}`);
+        handleDiff(`${res.data}`);
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));
@@ -77,6 +92,25 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
     setExpandAll((v) => !v);
   };
 
+  const isIgnored = (file: HunkFile) => {
+    const name = file.type === "delete" ? file.oldPath : file.newPath;
+    if (ignoredFiles.includes(name)) return true;
+    if (ignoredExtensions.some((v) => name.endsWith(v))) return true;
+    return false;
+  };
+
+  const filtered = hunks.filter((v) => {
+    if (isIgnored(v)) return false;
+    const name = v.type === "delete" ? v.oldPath : v.newPath;
+    const dir = name.split("/")[0];
+    // root files
+    if (!allPlatforms.map((v) => v.toLowerCase()).includes(dir)) return true;
+    // platform specific files
+    return platforms?.has(dir) ?? true;
+  });
+
+  const getFileKey = (file: HunkFile) => file.oldPath + "-" + file.newPath;
+
   if (!from || !to)
     return (
       <div className="mt-8 mb-40 flex items-center justify-center text-gray-500">
@@ -97,32 +131,6 @@ export default function DiffView({ platforms }: { platforms?: Set<string> }) {
         <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-200 border-t-blue-500" />
       </div>
     );
-
-  if (!patch) return null;
-
-  const files = parseDiff(patch, { nearbySequences: "zip" });
-
-  const ignoredFiles = [".metadata"];
-  const ignoredExtensions = [".png", ".ico"];
-
-  const isIgnored = (file: HunkFile) => {
-    const name = file.type === "delete" ? file.oldPath : file.newPath;
-    if (ignoredFiles.includes(name)) return true;
-    if (ignoredExtensions.some((v) => name.endsWith(v))) return true;
-    return false;
-  };
-
-  const filtered = files.filter((v) => {
-    if (isIgnored(v)) return false;
-    const name = v.type === "delete" ? v.oldPath : v.newPath;
-    const dir = name.split("/")[0];
-    // root files
-    if (!allPlatforms.map((v) => v.toLowerCase()).includes(dir)) return true;
-    // platform specific files
-    return platforms?.has(dir) ?? true;
-  });
-
-  const getFileKey = (file: HunkFile) => file.oldPath + "-" + file.newPath;
 
   return (
     <div className="mb-40">

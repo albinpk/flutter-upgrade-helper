@@ -1,14 +1,25 @@
 import { ignoredExtensions, ignoredFiles } from "@/components/DiffView";
+import { allPlatforms } from "@/components/Form";
 
 export const generateAiPrompt = (
   rawDiff: string,
   from: string,
   to: string,
+  platforms: Set<string>,
 ): string | null => {
   const ignoredPaths = [...ignoredFiles, ...ignoredExtensions];
   const parts = rawDiff.split("diff --git ");
+  const platformNames = allPlatforms.map((v) => v.toLowerCase());
   const diff = parts
-    .filter((v) => !ignoredPaths.some((i) => v.split("\n")[0].includes(i)))
+    .filter((v) => {
+      const nameLine = v.split("\n")[0];
+      const name = nameLine.replace("a/", "");
+      return (
+        !ignoredPaths.some((e) => nameLine.includes(e)) &&
+        (platformNames.every((dir) => !name.startsWith(dir)) ||
+          platforms.has(name.split("/")[0]))
+      );
+    })
     .join("\ndiff --git ")
     .trim();
   return diff ? promptContext(diff, from, to) : null;

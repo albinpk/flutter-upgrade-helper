@@ -23,10 +23,11 @@ export default function DiffView({
   platforms,
   setPrompt,
 }: {
-  platforms?: Set<string>;
+  platforms: Set<string>;
   setPrompt: (prompt: string | null) => void;
 }) {
   const router = useRouter();
+  const [diff, setDiff] = useState<string | null>(null);
   const [hunks, setHunks] = useState<HunkFile[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -35,17 +36,23 @@ export default function DiffView({
 
   const getCacheKey = (from: string, to: string) => `diff-${from}-${to}`;
 
-  const handleDiff = (rawDiff: string) => {
-    setHunks(parseDiff(rawDiff, { nearbySequences: "zip" }));
-    setPrompt(generateAiPrompt(rawDiff, from, to));
-  };
+  useEffect(() => {
+    if (!diff) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setHunks(parseDiff(diff, { nearbySequences: "zip" }));
+  }, [diff]);
 
   useEffect(() => {
-    if (!from || !to || from === to) return setPrompt(null);
+    if (!diff || !from || !to || from === to) return setPrompt(null);
+    setPrompt(generateAiPrompt(diff, from, to, platforms));
+  }, [diff, from, platforms, setPrompt, to]);
+
+  useEffect(() => {
+    if (!from || !to || from === to) return;
     const cachedDiff = localStorage.getItem(getCacheKey(from, to));
     if (cachedDiff) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      handleDiff(cachedDiff);
+      setDiff(cachedDiff);
       return;
     }
 
@@ -60,7 +67,7 @@ export default function DiffView({
       })
       .then((res) => {
         localStorage.setItem(getCacheKey(from, to), `${res.data}`);
-        handleDiff(`${res.data}`);
+        setDiff(`${res.data}`);
       })
       .catch((err) => console.error(err))
       .finally(() => setIsLoading(false));

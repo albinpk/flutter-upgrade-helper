@@ -67,20 +67,20 @@ export default function Form({
   const [fromList, setFromList] = useState(versions);
   const [toList, setToList] = useState(versions);
 
-  const [hideBugfixes, setHideBugfixes] = useState(false);
+  const [showBugfixes, setShowBugfixes] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setHideBugfixes(localStorage.getItem("hideBugfixes") === "true");
+    setShowBugfixes(localStorage.getItem("showBugfixes") === "true");
   }, []);
 
   // versions list is paginated
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFullVersion(
-      hideBugfixes ? versions.filter((v) => v.endsWith(".0")) : versions,
+      showBugfixes ? versions : versions.filter((v) => v.endsWith(".0")),
     );
-  }, [versions, hideBugfixes]);
+  }, [versions, showBugfixes]);
 
   useEffect(() => {
     const fromIdx = fullVersion.indexOf(from);
@@ -113,23 +113,23 @@ export default function Form({
             {/* Hide Bugfixes */}
             <div className="flex items-center gap-2">
               <input
-                id="hide-bugfixes"
+                id="show-bugfixes"
                 type="checkbox"
                 className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500 dark:border-gray-700 dark:bg-gray-800 dark:ring-offset-gray-900"
-                checked={hideBugfixes}
+                checked={showBugfixes}
                 onChange={(e) => {
-                  setHideBugfixes(e.target.checked);
+                  setShowBugfixes(e.target.checked);
                   localStorage.setItem(
-                    "hideBugfixes",
+                    "showBugfixes",
                     e.target.checked.toString(),
                   );
                 }}
               />
               <label
-                htmlFor="hide-bugfixes"
+                htmlFor="show-bugfixes"
                 className="text-sm font-medium text-gray-700 dark:text-gray-300"
               >
-                Hide bugfix releases
+                Show bugfix releases
               </label>
             </div>
 

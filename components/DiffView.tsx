@@ -41,8 +41,7 @@ export default function DiffView({
   };
 
   useEffect(() => {
-    if (!from || !to) return;
-    if (from === to) return;
+    if (!from || !to || from === to) return setPrompt(null);
     const cachedDiff = localStorage.getItem(getCacheKey(from, to));
     if (cachedDiff) {
       // eslint-disable-next-line react-hooks/set-state-in-effect

@@ -1,5 +1,20 @@
 # Changelog
 
+# [1.1.0](https://github.com/albinpk/flutter-upgrade-helper/compare/1.0.0...1.1.0) (2026-01-28)
+
+
+### Bug Fixes
+
+* prompt button visibility when versions changed ([b4fcf07](https://github.com/albinpk/flutter-upgrade-helper/commit/b4fcf07ba567aa784515d91861a1c46854c0df38))
+
+
+### Features
+
+* AI prompt from diff ([bd8dc8d](https://github.com/albinpk/flutter-upgrade-helper/commit/bd8dc8d5c4eb2fb272ec9d965232197c56b2f2ec))
+* copy file content ([88a6873](https://github.com/albinpk/flutter-upgrade-helper/commit/88a68733d9c6d6243e242843972643858f6ee70c))
+* split and unified diff view ([c94027b](https://github.com/albinpk/flutter-upgrade-helper/commit/c94027baf4b0ba125f2eb501f588ab1ebe311d50))
+* upgrade prompt based on selected platform ([47cdea2](https://github.com/albinpk/flutter-upgrade-helper/commit/47cdea2d81c236d797f3ec7dd5faf39753a045fc))
+
 # [1.0.0](https://github.com/albinpk/flutter-upgrade-helper/compare/0.3.0...1.0.0) (2026-01-18)
 
 

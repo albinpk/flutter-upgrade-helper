@@ -71,6 +71,7 @@ export default function DiffView({
 
   const [visibility, setVisibility] = useState<Visibility>({});
   const [expandAll, setExpandAll] = useState(true);
+  const [isSplitView, setIsSplitView] = useState(true);
 
   const onVisibilityChange = (key: string) => {
     setVisibility((o) => {
@@ -136,10 +137,16 @@ export default function DiffView({
     <div className="mb-40">
       <div className="mb-3 flex flex-row items-center justify-between rounded-md">
         {filtered.length} files
-        <TextButton
-          label={expandAll ? "Collapse All" : "Expand All"}
-          onClick={onExpandAll}
-        />
+        <div>
+          <TextButton
+            label={isSplitView ? "Unified View" : "Split View"}
+            onClick={() => setIsSplitView((v) => !v)}
+          />
+          <TextButton
+            label={expandAll ? "Collapse All" : "Expand All"}
+            onClick={onExpandAll}
+          />
+        </div>
       </div>
 
       {filtered.length === 0 ? (
@@ -159,6 +166,7 @@ export default function DiffView({
                 file={file}
                 show={visibility[key] ?? true}
                 onClickExpand={() => onVisibilityChange(key)}
+                isSplitView={isSplitView}
               />
             );
           })}
@@ -172,10 +180,12 @@ export function FileDiff({
   file,
   show,
   onClickExpand,
+  isSplitView,
 }: {
   file: HunkFile;
   show: boolean;
   onClickExpand: () => void;
+  isSplitView: boolean;
 }) {
   const getHunksWithAppName = useCallback(
     (originalHunks: HunkData[]) => {
@@ -215,7 +225,7 @@ export function FileDiff({
     <FileTile file={file} visible={show} onExpand={onClickExpand}>
       {show && (
         <Diff
-          viewType="split"
+          viewType={isSplitView ? "split" : "unified"}
           diffType={file.type}
           hunks={file.hunks}
           optimizeSelection

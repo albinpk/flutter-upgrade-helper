@@ -1,5 +1,7 @@
 # Changelog
 
+## [1.1.1](https://github.com/albinpk/flutter-upgrade-helper/compare/1.1.0...1.1.1) (2026-03-12)
+
 # [1.1.0](https://github.com/albinpk/flutter-upgrade-helper/compare/1.0.0...1.1.0) (2026-01-28)
 
 

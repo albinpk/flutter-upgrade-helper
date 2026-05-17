@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.2](https://github.com/albinpk/flutter-upgrade-helper/compare/1.1.1...1.1.2) (2026-05-17)
+
+
+### Bug Fixes
+
+* upgrade dependencies ([d3606c4](https://github.com/albinpk/flutter-upgrade-helper/commit/d3606c44e6ccbba4bbddc3af4155091907ca304a))
+
 ## [1.1.1](https://github.com/albinpk/flutter-upgrade-helper/compare/1.1.0...1.1.1) (2026-03-12)
 
 # [1.1.0](https://github.com/albinpk/flutter-upgrade-helper/compare/1.0.0...1.1.0) (2026-01-28)
